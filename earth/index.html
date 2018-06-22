@@ -39,7 +39,7 @@
         function init() {
             canvas = document.getElementById('webglcanvas');
             camera = new THREE.PerspectiveCamera(60,
-                window.innerWidth / window / innerHeight, 1, 2000);
+                window.innerWidth / window.innerHeight, 1, 2000);
             camera.position.z = 500;
             // 场景
             scene = new THREE.Scene();
@@ -51,11 +51,13 @@
             const loader = new THREE.TextureLoader();
              //文本材质的加载器
             loader.load('land_ocean_ice_cloud_2048.jpg',function(texture){
+                // console.log(texture)
                 const geometry = new THREE.SphereGeometry(200,20,20);
                 const material = new THREE.MeshBasicMaterial({
-                    map:texture
+                    map:texture,
+                    overdraw: .5
                 })    
-                const mesh = new THREE.Mesh(geometry,material);
+                const mesh = new THREE.Mesh(geometry, material);
                 group.add(mesh);
             })
             renderer = new THREE.WebGLRenderer({
