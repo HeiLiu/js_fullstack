@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- script 标签可以访问外部跨域脚本或地址 需要改造一下后端接口 实现jsonp， json with padding  callback(json)-->
+  <script>
+    function cb(data) {
+      console.log(data)
+    }
+    // cb({
+    //   name: 'Halo',
+    //   age: '22'
+    // })
+    </script>
+    <script src="http://localhost:3000/api?jsonpcallback=cb">
+    </script>
+</body>
+</html>

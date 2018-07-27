@@ -1,0 +1,16 @@
+{
+  "name": "jsonp",
+  "version": "1.0.0",
+  "description": "跨域名，跨端口，跨协议 => 跨域资源请求  \r   js ajax请求有一个同源机制",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.2",
+    "koa-router": "^7.4.0"
+  }
+}
