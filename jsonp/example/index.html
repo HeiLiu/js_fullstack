@@ -15,9 +15,24 @@
       params.data = params.data || {}
 
       var json = params.jsonp ? jsonp(params) : json(params)
-
       function jsonp(params) {
-
+        console.log(params)
+        // script 动态构建
+        var callbackName = params.jsonp
+        var head = document.getElementsByTagName('head')[0]
+        params.data['jsonpcallback'] = callbackName
+        var data = formatParams(params.data)
+        var script = document.createElement('script')
+        head.appendChild(script)
+        // 新建一个全局的变量 callbackName
+        window[callbackName] = function(json) {
+          head.removeChild(script)
+          window[callbackName] = null
+          // 如果有
+          params.success && params.success(json)
+        }
+        script.src = params.url + '?' + data
+        console.log(script.src)
       }
       function json(params) {
         params.type = (params.type || 'GET').toUpperCase()
@@ -65,27 +80,14 @@
         return Math.floor(Math.random()*10000 + 500)
       }
     }
-
-    ajax({
-      type: 'Get',
-      url: '/data.json',
-      data: {
-        name: '刘江龙',
-        age: '123'
-      },
-      jsonp: false,
-      success: data => { console.log(data) },
-      error: err => { console.log(err) }
-    })
-    function cb(data) {
-      console.log(data)
-    }
-    // cb({
-    //   name: 'Halo',
-    //   age: '22'
-    // })
     </script>
-    <script src="http://localhost:3000/api?jsonpcallback=cb">
+    <script>
+      ajax({
+        jsonp: 'jsonpcallback',
+        url: 'http://localhost:3000/api',
+        success: (data) =>{ console.log(data) },
+        error: err => { console.log(err) }
+      })
     </script>
 </body>
 </html>

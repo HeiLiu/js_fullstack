@@ -7,9 +7,9 @@ router.get('/api', (ctx) => {
     age: '22'
   }
   let cb = ctx.query.jsonpcallback
-  const query = {
-    jsonpcallback: callback
-  }
+  // const query = {
+  //   jsonpcallback: cb
+  // }
   if(cb) {
     ctx.body = cb + '(' + JSON.stringify(data)+ ')'
   } else{
